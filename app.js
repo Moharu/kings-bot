@@ -83,7 +83,19 @@ if(command === "tedio") {
 if(command === "felsp") {
     message.channel.send("https://gfycat.com/gifs/detail/FamiliarSpanishBlesbok")
 }
+  
+if(command === "rodolpho") {
+    message.channel.send("https://www.youtube.com/watch?v=6iHdVa9YQtI")
+}
+  
+if(command === "COD") {
+    message.channel.send("RIP :candle:")
+}
 
+if(command === "godzin") {
+    message.channel.send("https://www.youtube.com/watch?v=9LDj8zRY_q4&feature=youtu.be")
+}
+ 
 })
 
 client.login(config.token)
