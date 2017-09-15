@@ -6,7 +6,10 @@ const Discord = require("discord.js")
 // this is what we're refering to. Your client.
 const client = new Discord.Client()
 // Here we load the config.json file that contains our token and our prefix values. 
-const config = require("./config.json")
+const config = {
+    prefix: '+',
+    token: process.env.DISCORD_TOKEN
+}
 const membrosMessage = `
 Roster:
 
@@ -61,6 +64,10 @@ if(command === "costinhas") {
 
 if(command === "tedio") {
     message.channel.send("https://im4.ezgif.com/tmp/ezgif-4-dda00fe9e8.gif")
+}
+    
+if(command === "felsp") {
+    message.channel.send("https://gfycat.com/gifs/detail/FamiliarSpanishBlesbok")
 }
 
 })
