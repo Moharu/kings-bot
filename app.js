@@ -72,8 +72,8 @@ if(command === "soquinho") {
     message.channel.send("PROCURA-SE: Soquinho do ANKLE, caso você tenha visto ele favor contatar A Rocha Felpuda.")
 }
 
-if(command === "costinhas") {
-    message.channel.send("https://clips.twitch.tv/TalentedTallWombatTF2John/edit?muted=true")
+if(command === "costinhas" || command === "apoca" || command === "apocostinhas") {
+    message.channel.send("http://gph.is/2x3uFFj")
 }
 
 if(command === "tedio") {
@@ -94,6 +94,10 @@ if(command === "comets") {
 
 if(command === "godzin") {
     message.channel.send("https://www.youtube.com/watch?v=9LDj8zRY_q4&feature=youtu.be")
+}
+ 
+if(command === "bom dia" || command === "boa tarde" || command === "boa noite") {
+    message.channel.send("hehe.. Depende do ponto de vista")
 }
  
 })
