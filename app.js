@@ -77,7 +77,7 @@ if(command === "costinhas") {
 }
 
 if(command === "tedio") {
-    message.channel.send("https://im4.ezgif.com/tmp/ezgif-4-dda00fe9e8.gif")
+    message.channel.send("https://gfycat.com/gifs/detail/CraftyAchingBobcat")
 }
     
 if(command === "felsp") {
@@ -88,7 +88,7 @@ if(command === "rodolpho") {
     message.channel.send("https://www.youtube.com/watch?v=6iHdVa9YQtI")
 }
   
-if(command === "COD") {
+if(command === "comets") {
     message.channel.send("RIP :candle:")
 }
 
