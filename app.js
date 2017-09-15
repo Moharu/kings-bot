@@ -96,7 +96,7 @@ if(command === "godzin") {
     message.channel.send("https://www.youtube.com/watch?v=9LDj8zRY_q4&feature=youtu.be")
 }
  
-if(command === "bom dia" || command === "boa tarde" || command === "boa noite") {
+if((command === "bom" && args[0] === "dia") || (command === "boa" && (args[0] === "tarde" || args[0] === "noite"))) {
     message.channel.send("hehe.. Depende do ponto de vista")
 }
  
