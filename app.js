@@ -1,5 +1,3 @@
-import oversmash from 'oversmash'
-const ow = oversmash()
 // express stuff to keep it alive
 var express = require('express');
 var app = express();
