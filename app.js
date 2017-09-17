@@ -28,7 +28,7 @@ const config = {
 const fetch = require('node-fetch').default
 const querystring = require('querystring')
 
-const members = ['Moharu-1328', 'ANƘLE-1261', 'Apocalypse35-1232', 'TedioF-1526', 'VinnyMǶ-1658']
+const members = ['Moharu-1328', 'ANƘLE-1261', 'Apocalypse35-1232', 'TedioF-1526', 'VinnyMǶ-1658', 'RochaFelpuda-11761']
 const getMemberRanks = async function(m) {
     let ranks = []
     for(let member of m){
