@@ -119,10 +119,10 @@ if((command === "bom" && args[0] === "dia") || (command === "boa" && (args[0] ==
 if(command === "lugatao") message.channel.send("rakz god ...")
 
 if(command === "ranks") {
-    const m = await message.channel.send("Searching ranks...");
+    const m = await message.channel.send("Loading ranks...");
     let msg = ''
     try {
-        msg = (await getMemberRanks(members)).join('/n')
+        msg = (await getMemberRanks(members)).join('\n')
     } catch (e) {
         console.log('cant fetch ranks')
         console.log(e)
