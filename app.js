@@ -1,3 +1,5 @@
+import oversmash from 'oversmash'
+const ow = oversmash()
 // express stuff to keep it alive
 var express = require('express');
 var app = express();
@@ -24,6 +26,22 @@ const config = {
     prefix: '+',
     token: process.env.DISCORD_TOKEN
 }
+
+const fetch = require('node-fetch').default
+const querystring = require('querystring')
+
+const members = ['Moharu-1328', 'ANƘLE-1261', 'Apocalypse35-1232', 'TedioF-1526', 'VinnyMǶ-1658']
+const getMemberRanks = async function(m) {
+    let ranks = []
+    for(let member of m){
+        let r = await fetch(`https://owapi.net/api/v3/u/${querystring.escape(member)}/stats`).then(r => r.json()).then(r => r.us.stats.competitive.overall_stats)
+        let string = `${member}: ${r.comprank || 'memede10'}`
+        ranks.push(string)
+        await new Promise((resolve, reject) => setTimeout(() => resolve(), 1000))
+    }
+    return ranks
+}
+
 const membrosMessage = `
 Roster:
 
@@ -100,6 +118,21 @@ if((command === "bom" && args[0] === "dia") || (command === "boa" && (args[0] ==
     message.channel.send("hehe.. Depende do ponto de vista")
 }
  
+if(command === "lugatao") message.channel.send("rakz god ...")
+
+if(command === "ranks") {
+    const m = await message.channel.send("Searching ranks...");
+    let msg = ''
+    try {
+        msg = (await getMemberRanks()).join('/n')
+    } catch (e) {
+        console.log('cant fetch ranks')
+        console.log(e)
+        msg = 'Error searching ranks, try calling Moharu to make him fix this shit'
+    }
+    m.edit(msg)
+}
+
 })
 
 client.login(config.token)
