@@ -122,7 +122,7 @@ if(command === "ranks") {
     const m = await message.channel.send("Searching ranks...");
     let msg = ''
     try {
-        msg = (await getMemberRanks()).join('/n')
+        msg = (await getMemberRanks(members)).join('/n')
     } catch (e) {
         console.log('cant fetch ranks')
         console.log(e)
