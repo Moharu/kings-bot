@@ -12,6 +12,8 @@ app.listen(app.get('port'), function() {
 });
 
 
+const _ = require('lodash')
+
 // Load up the discord.js library
 const Discord = require("discord.js")
 
@@ -22,7 +24,7 @@ const client = new Discord.Client()
 // Here we load the config.json file that contains our token and our prefix values. 
 const config = {
     prefix: '+',
-    token: process.env.DISCORD_TOKEN
+    token: process.env.DISCORD_TOKEN || "MzU4MzM0ODAwNDI1Mzg1OTg1.DKE2Og.XKQSmKhfXGDbkvxDj-YKGe8TAv8"
 }
 
 const fetch = require('node-fetch').default
@@ -36,8 +38,7 @@ const getMemberRanks = async function(m) {
     let ranks = []
     for(let member of m){
         let r = await fetch(`https://owapi.net/api/v3/u/${querystring.escape(member)}/stats`).then(r => r.json()).then(r => r.us.stats.competitive.overall_stats)
-        let string = r.comprank
-        ranks.push(string)
+        ranks.push({ rank: r.comprank, tier: r.tier })
         await new Promise((resolve, reject) => setTimeout(() => resolve(), 1000))
     }
     return ranks
@@ -131,12 +132,16 @@ if(command === "ranks") {
 
     try {
         let ranks = await getMemberRanks(members)
-        msg = ranks.map((rank, i) => {
-            if(rank !== null){
-                avg += Number(rank)
+        msg = ranks.map((info, i) => {
+            if(info.rank !== null){
+                avg += Number(info.rank)
                 count += 1
             }
-            return `**${memberNames[i]}:**   ${rank || 'memeDe10'}`
+            let tier = info.tier ? info.tier : ''
+            if(tier) {
+                tier = `:${_.capitalize(tier)}:`
+            }
+            return `**${memberNames[i]}:**  ${info.rank || 'memeDe10'} ${tier}`
         }).join('\n')
         let average = avg/count
         m.edit(msg + `\n\nMédia do time: ${Math.round(average)}`)
