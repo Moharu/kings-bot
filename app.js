@@ -95,7 +95,7 @@ client.on("message", async message => {
     }
 
     if(command === "costinhas" || command === "apoca" || command === "apocostinhas") {
-        message.channel.send("http://gph.is/2x3uFFj")
+        message.channel.send("https://gfycat.com/gifs/detail/PartialRawBlackbear")
     }
 
     if(command === "tedio") {
