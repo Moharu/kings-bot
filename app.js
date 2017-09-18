@@ -34,7 +34,7 @@ const getMemberRanks = async function(m) {
     let ranks = []
     for(let member of m){
         let r = await fetch(`https://owapi.net/api/v3/u/${querystring.escape(member)}/stats`).then(r => r.json()).then(r => r.us.stats.competitive.overall_stats)
-        let string = `${r.comprank || 'memede10'}`
+        let string = r.comprank
         ranks.push(string)
         await new Promise((resolve, reject) => setTimeout(() => resolve(), 1000))
     }
@@ -124,17 +124,17 @@ if(command === "ranks") {
     let msg = ''
     let avg = 0
     let count = 0
+
     try {
-        let ranks = await getMemberRanks(members)
         msg = ranks.map((rank, i) => {
-            if(rank){
+            if(rank !== null){
                 avg += Number(rank)
                 count += 1
             }
-            return `${memberNames[i]}: ${rank || 'memeDe10'}`
+            return `**${memberNames[i]}:**   ${rank || 'memeDe10'}`
         }).join('\n')
         let average = avg/count
-        m.edit(msg + `\nMédia do time: ${average}`)
+        m.edit(msg + `\nMédia do time: ${Math.round(average)}`)
     } catch (e) {
         console.log('cant fetch ranks')
         console.log(e)
