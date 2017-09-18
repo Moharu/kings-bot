@@ -24,7 +24,7 @@ const client = new Discord.Client()
 // Here we load the config.json file that contains our token and our prefix values. 
 const config = {
     prefix: '+',
-    token: process.env.DISCORD_TOKEN || "MzU4MzM0ODAwNDI1Mzg1OTg1.DKE2Og.XKQSmKhfXGDbkvxDj-YKGe8TAv8"
+    token: process.env.DISCORD_TOKEN
 }
 
 const fetch = require('node-fetch').default
