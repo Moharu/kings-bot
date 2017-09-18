@@ -28,6 +28,8 @@ const config = {
 const fetch = require('node-fetch').default
 const querystring = require('querystring')
 
+const owHeroes = ["doomfist", "genji", "mccree", "sombra", "reaper", "soldier", "tracer", "pharah", "widowmaker", "hanzo", "mei", "bastion", "torb", "junkrat","rein", "winston", "dva", "orisa", "hog", "zarya", "ana", "mercy", "zen", "lucio", "symmetra"]
+
 const members = ['Moharu-1328', 'ANƘLE-1261', 'Apocalypse35-1232', 'TedioF-1526', 'VinnyMǶ-1658', 'RochaFelpuda-11761']
 const memberNames = ['Moharu', 'ANƘLE', 'Apocalypse35', 'TedioF', 'VinnyMǶ', 'RochaFelpuda']
 const getMemberRanks = async function(m) {
@@ -118,6 +120,8 @@ if((command === "bom" && args[0] === "dia") || (command === "boa" && (args[0] ==
 }
  
 if(command === "lugatao") message.channel.send("rakz god ...")
+
+if(command === "rakz" && args[0] === "god") message.channel.send(owHeroes[Math.round(Math.random()*owHeroes.length)])
 
 if(command === "ranks") {
     const m = await message.channel.send("Loading ranks...");
