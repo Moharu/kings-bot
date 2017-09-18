@@ -113,6 +113,10 @@ client.on("message", async message => {
     if(command === "comets") {
         message.channel.send("RIP :candle:")
     }
+  
+    if(command === "help") {
+        message.channel.send("sorry no help for you :)")
+    }
 
     if(command === "godzin") {
         message.channel.send("https://gfycat.com/gifs/detail/AgedAcidicAlpaca")
