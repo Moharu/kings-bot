@@ -135,7 +135,7 @@ if(command === "ranks") {
             return `**${memberNames[i]}:**   ${rank || 'memeDe10'}`
         }).join('\n')
         let average = avg/count
-        m.edit(msg + `\nMédia do time: ${Math.round(average)}`)
+        m.edit(msg + `\n\nMédia do time: ${Math.round(average)}`)
     } catch (e) {
         console.log('cant fetch ranks')
         console.log(e)
