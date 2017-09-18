@@ -140,10 +140,10 @@ client.on("message", async message => {
                     count += 1
                 }
                 let tier = info.tier ? info.tier : 'none'
-                return `${ranksEmoji[tier]}\t${info.rank || 'md10'}\t**${memberNames[i]}**`
+                return `${ranksEmoji[tier]}\t**${info.rank || 'md10'}**\t${memberNames[i]}`
             }).join('\n')
             let average = avg/count
-            m.edit(msg + `\n\nMédia do time: ${Math.round(average)}`)
+            m.edit(msg + `\n\nMédia do time: **${Math.round(average)}**`)
         } catch (e) {
             console.log('cant fetch ranks')
             console.log(e)
