@@ -126,6 +126,7 @@ if(command === "ranks") {
     let count = 0
 
     try {
+        let ranks = await getMemberRanks(members)
         msg = ranks.map((rank, i) => {
             if(rank !== null){
                 avg += Number(rank)
