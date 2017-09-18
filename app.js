@@ -115,7 +115,7 @@ client.on("message", async message => {
     }
 
     if(command === "godzin") {
-        message.channel.send("https://www.youtube.com/watch?v=9LDj8zRY_q4&feature=youtu.be")
+        message.channel.send("https://gfycat.com/gifs/detail/AgedAcidicAlpaca")
     }
     
     if((command === "bom" && args[0] === "dia") || (command === "boa" && (args[0] === "tarde" || args[0] === "noite"))) {
