@@ -106,6 +106,10 @@ client.on("message", async message => {
         message.channel.send("VAI TOMA NO CUUU!!!")
     }
   
+  if(command === "treino") {
+        message.channel.send("Treino todo dia as 20 seu vagabundo!")
+    }
+  
     if(command === "felsp") {
         message.channel.send("https://gfycat.com/gifs/detail/FamiliarSpanishBlesbok")
     }
