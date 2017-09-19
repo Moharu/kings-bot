@@ -131,8 +131,6 @@ client.on("message", async message => {
     }
     
     if(command === "lugatao") message.channel.send("rakz god ...")
-  
-    if(command === "treino) message.channel.send("Treino todo dia as 20 seu vagabundo!")
 
     if(command === "rakz" && args[0] === "god") message.channel.send(owHeroes[Math.round(Math.random()*owHeroes.length)])
 
