@@ -101,7 +101,11 @@ client.on("message", async message => {
     if(command === "tedio") {
         message.channel.send("https://gfycat.com/gifs/detail/CraftyAchingBobcat")
     }
-        
+     
+    if(command === "tapita") {
+        message.channel.send("VAI TOMA NO CUUU!!!")
+    }
+  
     if(command === "felsp") {
         message.channel.send("https://gfycat.com/gifs/detail/FamiliarSpanishBlesbok")
     }
