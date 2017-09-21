@@ -10,6 +10,8 @@ app.get('/', function(request, response) {
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+let moment = require('moment')
+const calendar = require('./scripts/calendar')
 
 
 const _ = require('lodash')
@@ -161,6 +163,51 @@ client.on("message", async message => {
             console.log(e)
             msg = 'Error searching ranks, try calling Moharu to make him fix this shit'
             m.edit(msg)
+        }
+    }
+
+    if(command === "calendar"){
+        let option = args[0]
+        if(args[0] !== 'add' && args[0] !== 'today' && args[0] !== 'remove' && args[0] !== 'list') return message.channel.send("Não entendi o que vc quer fazer meu chapa, experimenta esses: add, remove, list, today")
+        if(option === 'add') {
+            let date = args[1]
+            let time = args[2]
+            if(!date) return message.channel.send("Cê é burro por acaso? Me diz quando vai ser esse diabo.")
+            if(!time) return message.channel.send("Mas que horas?")
+            date = moment(date + ' ' + time, "DD/MM/YYYY HH:mm")
+            if(!date.isValid()) return message.channel.send("Por favor escreva a data que nem gente (DD/MM/YYYY HH:mm).")
+            if(date.isBefore(moment())) return message.channel.send("Infelizmente o time não pode voltar no tempo pra esse evento.")
+            let label = args[3]
+            for(let i = 4; i < args.length; i++){
+                label += ' ' + args[i]
+            }
+            if(!label) return message.channel.send("Querida você só passou a data, o quê vai ter nesse dia, caramba?")
+
+            calendar.addEvent({ date: date.toISOString() , label }).then(ref => {
+                message.channel.send("Beleza, tá na mão:\n**" + date.format("DD/MM/YYYY HH:mm") + '** ' + label + `\n\nID: **${ref.key}**`)
+            })
+        } else if (option === 'list') {
+            let showIds = args[1] === 'ids'
+            let notify = args[1] === 'notify'
+            let now = moment()
+            calendar.getEvents()
+                .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
+                .then(events => events.filter(event => now.isBefore(event.date)))
+                .then(events => events.map(event => `${showIds ? (event.id + ' ') : ''}**${moment(event.date).format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
+                .then(events => message.channel.send(`${events}${notify ? '\n@everyone': ''}`))
+        } else if (option === 'today') {
+            let notify = args[1] === 'notify'
+            let now = moment()
+            calendar.getEvents()
+                .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
+                .then(events => events.filter(event => now.isSame(event.date, 'day')))
+                .then(events => events.map(event => `**${moment(event.date).format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
+                .then(events => message.channel.send(`${events}${notify ? '\n@everyone': ''}`))
+        } else if (option === 'remove') {
+            let id = args[1]
+            calendar.removeEvent({ id })
+            .then( removed => message.channel.send(`Evento **${id}** foi pro beleléu.`))
+            .catch(e => message.channel.send("Não consegui remover esse esquema aí não"))
         }
     }
 

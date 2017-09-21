@@ -1,0 +1,20 @@
+const firebase = require('firebase')
+let app = firebase.initializeApp({
+    apiKey: process.env.FIRE_KEY,
+    authDomain: process.env.FIRE_DOMAIN,
+    databaseURL: process.env.FIRE_URL,
+    projectId: process.env.FIRE_PROJECTID,
+    storageBucket: process.env.FIRE_STORAGE,
+    messagingSenderId: process.env.FIRE_SENDERID
+})
+firebase.auth().signInWithEmailAndPassword(process.env.FIRE_EMAIL, process.env.FIRE_PASSWORD)
+let events = firebase.database().ref('events')
+
+const addEvent = ({ date, label }) => events.push({ date, label })
+const removeEvent = ({ id }) => events.child(id).remove()
+const editEvent = ({ id, date, label }) => events.child(id).set({ date, label })
+const getEvents = () => events.limitToLast(20).once('value').then(data => data.val())
+
+module.exports = {
+    addEvent, removeEvent, editEvent, getEvents
+}
