@@ -10,7 +10,7 @@ app.get('/', function(request, response) {
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
-let moment = require('moment')
+let moment = require('moment-timezone')
 const calendar = require('./scripts/calendar')
 
 
@@ -174,7 +174,7 @@ client.on("message", async message => {
             let time = args[2]
             if(!date) return message.channel.send("Cê é burro por acaso? Me diz quando vai ser esse diabo.")
             if(!time) return message.channel.send("Mas que horas?")
-            date = moment(date + ' ' + time, "DD/MM/YYYY HH:mm")
+            date = moment.tz(date + ' ' + time, "DD/MM/YYYY HH:mm", "America/Sao_Paulo")
             if(!date.isValid()) return message.channel.send("Por favor escreva a data que nem gente (DD/MM/YYYY HH:mm).")
             if(date.isBefore(moment())) return message.channel.send("Infelizmente o time não pode voltar no tempo pra esse evento.")
             let label = args[3]
@@ -193,7 +193,7 @@ client.on("message", async message => {
             calendar.getEvents()
                 .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
                 .then(events => events.filter(event => now.isBefore(event.date)))
-                .then(events => events.map(event => `${showIds ? (event.id + ' ') : ''}**${moment(event.date).format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
+                .then(events => events.map(event => `${showIds ? (event.id + ' ') : ''}**${moment(event.date).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
                 .then(events => message.channel.send(`${events}${notify ? '\n@everyone': ''}`))
         } else if (option === 'today') {
             let notify = args[1] === 'notify'
@@ -201,7 +201,7 @@ client.on("message", async message => {
             calendar.getEvents()
                 .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
                 .then(events => events.filter(event => now.isSame(event.date, 'day')))
-                .then(events => events.map(event => `**${moment(event.date).format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
+                .then(events => events.map(event => `**${moment(event.date).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
                 .then(events => message.channel.send(`${events}${notify ? '\n@everyone': ''}`))
         } else if (option === 'remove') {
             let id = args[1]
