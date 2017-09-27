@@ -194,7 +194,7 @@ client.on("message", async message => {
                 .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
                 .then(events => events.filter(event => now.isBefore(event.date)))
                 .then(events => events.map(event => `${showIds ? (event.id + ' ') : ''}**${moment(event.date).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
-                .then(events => message.channel.send(`${events}${notify ? '\n@everyone': ''}`))
+                .then(events => message.channel.send(`${events|| 'Nenhum evento encontrado.'}${notify ? '\n@everyone': ''}`))
         } else if (option === 'today') {
             let notify = args[1] === 'notify'
             let now = moment.tz("America/Sao_Paulo")
@@ -202,7 +202,7 @@ client.on("message", async message => {
                 .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
                 .then(events => events.filter(event => now.isSame(moment.tz(event.date, "America/Sao_Paulo"), 'day')))
                 .then(events => events.map(event => `**${moment(event.date).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
-                .then(events => message.channel.send(`${events}${notify ? '\n@everyone': ''}`))
+                .then(events => message.channel.send(`${events || 'Nenhum evento encontrado.'}${notify ? '\n@everyone': ''}`))
         } else if (option === 'remove') {
             let id = args[1]
             calendar.removeEvent({ id })
