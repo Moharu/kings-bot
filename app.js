@@ -197,10 +197,10 @@ client.on("message", async message => {
                 .then(events => message.channel.send(`${events}${notify ? '\n@everyone': ''}`))
         } else if (option === 'today') {
             let notify = args[1] === 'notify'
-            let now = moment()
+            let now = moment.tz("America/Sao_Paulo")
             calendar.getEvents()
                 .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
-                .then(events => events.filter(event => now.isSame(event.date, 'day')))
+                .then(events => events.filter(event => now.isSame(moment.tz(event.date, "America/Sao_Paulo"), 'day')))
                 .then(events => events.map(event => `**${moment(event.date).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
                 .then(events => message.channel.send(`${events}${notify ? '\n@everyone': ''}`))
         } else if (option === 'remove') {
