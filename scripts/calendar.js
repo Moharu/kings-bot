@@ -9,28 +9,28 @@ let app = firebase.initializeApp({
 })
 
 const addEvent = ({ date, label }) => {
-    firebase.auth().signInWithEmailAndPassword(process.env.FIRE_EMAIL, process.env.FIRE_PASSWORD).then(() => {
+    return firebase.auth().signInWithEmailAndPassword(process.env.FIRE_EMAIL, process.env.FIRE_PASSWORD).then(() => {
         let events = firebase.database().ref('events')
         return events.push({ date, label })
     })
 }
 const removeEvent = ({ id }) => {
-    firebase.auth().signInWithEmailAndPassword(process.env.FIRE_EMAIL, process.env.FIRE_PASSWORD).then(() => {
+    return firebase.auth().signInWithEmailAndPassword(process.env.FIRE_EMAIL, process.env.FIRE_PASSWORD).then(() => {
         let events = firebase.database().ref('events')
         return events.child(id).remove()
-    }
+    })
 }
 const editEvent = ({ id, date, label }) => {
-    firebase.auth().signInWithEmailAndPassword(process.env.FIRE_EMAIL, process.env.FIRE_PASSWORD).then(() => {
+    return firebase.auth().signInWithEmailAndPassword(process.env.FIRE_EMAIL, process.env.FIRE_PASSWORD).then(() => {
         let events = firebase.database().ref('events')
         return events.child(id).set({ date, label })
-    }
+    })
 }
 const getEvents = () => {
-    firebase.auth().signInWithEmailAndPassword(process.env.FIRE_EMAIL, process.env.FIRE_PASSWORD).then(() => {
+    return firebase.auth().signInWithEmailAndPassword(process.env.FIRE_EMAIL, process.env.FIRE_PASSWORD).then(() => {
         let events = firebase.database().ref('events')
         return events.limitToLast(20).once('value').then(data => data.val())
-    }
+    })
 }
 
 module.exports = {
