@@ -193,6 +193,7 @@ client.on("message", async message => {
             calendar.getEvents()
                 .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
                 .then(events => events.filter(event => now.isBefore(event.date)))
+                .then(events => events.sort((a,b) => moment(a).isBefore(b)))
                 .then(events => events.map(event => `${showIds ? (event.id + ' ') : ''}**${moment(event.date).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
                 .then(events => message.channel.send(`${events|| 'Nenhum evento encontrado.'}${notify ? '\n@everyone': ''}`))
         } else if (option === 'today') {
@@ -201,6 +202,7 @@ client.on("message", async message => {
             calendar.getEvents()
                 .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
                 .then(events => events.filter(event => now.isSame(moment.tz(event.date, "America/Sao_Paulo"), 'day')))
+                .then(events => events.sort((a,b) => moment(a).isBefore(b)))
                 .then(events => events.map(event => `**${moment(event.date).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
                 .then(events => message.channel.send(`${events || 'Nenhum evento encontrado.'}${notify ? '\n@everyone': ''}`))
         } else if (option === 'remove') {
