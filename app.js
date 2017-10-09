@@ -103,6 +103,10 @@ client.on("message", async message => {
     if(command === "tedio") {
         message.channel.send("https://gfycat.com/gifs/detail/CraftyAchingBobcat")
     }
+  
+    if(command === "apocaralho") {
+        message.channel.send("https://www.myinstants.com/instant/aiiiiiii-caralhu-57879/")
+    }
      
     if(command === "tapita") {
         message.channel.send("VAI TOMA NO CUUU!!!")
