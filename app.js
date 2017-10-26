@@ -19,11 +19,11 @@ const _ = require('lodash')
 // Load up the discord.js library
 const Discord = require("discord.js")
 
-// This is your client. Some people call it `bot`, some people call it `self`, 
+// This is your client. Some people call it `bot`, some people call it `self`,
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
 // this is what we're refering to. Your client.
 const client = new Discord.Client()
-// Here we load the config.json file that contains our token and our prefix values. 
+// Here we load the config.json file that contains our token and our prefix values.
 const config = {
     prefix: '+',
     token: process.env.DISCORD_TOKEN
@@ -62,7 +62,7 @@ Roster:
 // config.prefix contains the message prefix.
 client.on("ready", () => {
     // This event will run if the bot starts, and logs in, successfully.
-    console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`) 
+    console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`)
     // Example of changing the bot's playing game to something useful. `client.user` is what the
     // docs refer to as the "ClientUser".
     client.user.setGame(`flashbang e dando 96 de d dps`)
@@ -72,10 +72,10 @@ client.on("message", async message => {
     // It's good practice to ignore other bots. This also makes your bot ignore itself
     // and not get into a spam loop (we call that "botception").
     if(message.author.bot) return
-    // Also good practice to ignore any message that does not start with our prefix, 
+    // Also good practice to ignore any message that does not start with our prefix,
     // which is set in the configuration file.
     if(message.content.indexOf(config.prefix) !== 0) return
-    // Here we separate our "command" name, and our "arguments" for the command. 
+    // Here we separate our "command" name, and our "arguments" for the command.
     // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
     // command = say
     // args = ["Is", "this", "the", "real", "life?"]
@@ -103,31 +103,35 @@ client.on("message", async message => {
     if(command === "tedio") {
         message.channel.send("https://gfycat.com/gifs/detail/CraftyAchingBobcat")
     }
-  
+
     if(command === "apocaralho") {
         message.channel.send("https://www.myinstants.com/instant/aiiiiiii-caralhu-57879/")
     }
-     
+
     if(command === "tapita") {
         message.channel.send("VAI TOMA NO CUUU!!!")
     }
-  
+
   if(command === "treino") {
         message.channel.send("Treino todo dia as 20 seu vagabundo!")
     }
-  
+
     if(command === "felsp") {
         message.channel.send("https://gfycat.com/gifs/detail/FamiliarSpanishBlesbok")
     }
-    
+
     if(command === "rodolpho") {
         message.channel.send("https://www.youtube.com/watch?v=6iHdVa9YQtI")
     }
-    
+
     if(command === "comets") {
         message.channel.send("RIP :candle:")
     }
-  
+
+    if(command === "moharu") {
+        message.channel.send("O MAIOR JOGADOR QUE EXISTE ALÉM DE SER O FODA DESSE TIMIZINHO BANDO DE CARREGADO AI MOHARU DEUS CARALHO VAO SE FUDER TODO MUNDO ARGENTINO NÃO TEM VEEEEEEEEEEEEEEEEEZ")
+    }
+
     if(command === "help") {
         message.channel.send("sorry no help for you :)")
     }
@@ -135,11 +139,11 @@ client.on("message", async message => {
     if(command === "godzin") {
         message.channel.send("https://gfycat.com/gifs/detail/AgedAcidicAlpaca")
     }
-    
+
     if((command === "bom" && args[0] === "dia") || (command === "boa" && (args[0] === "tarde" || args[0] === "noite"))) {
         message.channel.send("hehe.. Depende do ponto de vista")
     }
-    
+
     if(command === "lugatao") message.channel.send("rakz god ...")
 
     if(command === "rakz" && args[0] === "god") message.channel.send(owHeroes[Math.round(Math.random()*owHeroes.length)])
@@ -195,7 +199,7 @@ client.on("message", async message => {
             let notify = args[1] === 'notify'
             let now = moment()
             calendar.getEvents()
-                .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
+                .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label })))
                 .then(events => events.filter(event => now.isBefore(event.date)))
                 .then(events => events.sort( (a,b) => moment(a.date).diff(moment(b.date)) ))
                 .then(events => events.map(event => `${showIds ? (event.id + ' ') : ''}**${moment(event.date).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
@@ -204,7 +208,7 @@ client.on("message", async message => {
             let notify = args[1] === 'notify'
             let now = moment.tz("America/Sao_Paulo")
             calendar.getEvents()
-                .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label }))) 
+                .then(eventsObj => Object.keys(eventsObj).map(key => ({ id: key, date: eventsObj[key].date, label: eventsObj[key].label })))
                 .then(events => events.filter(event => now.isSame(moment.tz(event.date, "America/Sao_Paulo"), 'day')))
                 .then(events => events.sort( (a,b) => moment(a.date).diff(moment(b.date)) ))
                 .then(events => events.map(event => `**${moment(event.date).tz("America/Sao_Paulo").format("DD/MM/YYYY HH:mm")}**    ${event.label}`).join("\n"))
