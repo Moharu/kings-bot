@@ -112,8 +112,8 @@ client.on("message", async message => {
         message.channel.send("VAI TOMA NO CUUU!!!")
     }
   
-    if(command === "blzankle") {
-        message.channel.send("https://youtu.be/6DHxyozcNU4") 
+    if(command === "vaiankle") {
+        message.channel.send("http://gph.is/2hbdFmT") 
     }
   
   if(command === "treino") {
