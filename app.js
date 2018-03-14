@@ -140,6 +140,10 @@ client.on("message", async message => {
         message.channel.send("https://gfycat.com/gifs/detail/AgedAcidicAlpaca")
     }
     
+    if(command === "ankle2018") {
+        message.channel.send("http://gph.is/2paQYmm")
+    }
+  
     if((command === "bom" && args[0] === "dia") || (command === "boa" && (args[0] === "tarde" || args[0] === "noite"))) {
         message.channel.send("hehe.. Depende do ponto de vista")
     }
