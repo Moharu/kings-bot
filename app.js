@@ -124,6 +124,10 @@ client.on("message", async message => {
         message.channel.send("https://gfycat.com/gifs/detail/FamiliarSpanishBlesbok")
     }
     
+    if(command === "skai") {
+        message.channel.send("https://http2.mlstatic.com/carteira-masculina-slim-couro-legitimo-D_NQ_NP_610393-MLB25692055838_062017-F.jpg")
+    }
+  
     if(command === "rodolpho") {
         message.channel.send("https://www.youtube.com/watch?v=6iHdVa9YQtI")
     }
